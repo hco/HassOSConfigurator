@@ -14,7 +14,9 @@ set +e
 
   performWork () {
     partition=$1
+    echo "Trying $partition"
     mount /dev/$partition /tmp/$partition 2>/dev/null
+    ls -al /tmp/$partition
     if [ -e /tmp/$partition/cmdline.txt ]; then
       if test -e /tmp/$partition/CONFIG/ && grep "$key" /tmp/$partition/CONFIG/authorized_keys 2>&1>/dev/null; then
         echo "already added this key to $partition";
